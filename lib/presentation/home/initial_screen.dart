@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../core/injection.dart'; 
 import '../onboarding/onboarding_screen.dart';
 import '../auth/auth_screen.dart';
-import 'main_tab_screen.dart';
 import '../../domain/usecases/check_onboarding_usecase.dart';
 import '../../domain/usecases/is_logged_in_usecase.dart';
 import 'home_screen.dart';
