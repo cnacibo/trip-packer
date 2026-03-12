@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
-import '../weather/weather_model.dart';
+import 'trip_type_enum.dart';
 
-enum TripType { beach, mountains, city, business }
+part 'trip_model.g.dart';
 
 @HiveType(typeId: 0)
 class TripModel {
@@ -17,8 +17,8 @@ class TripModel {
   final DateTime endDate;
   @HiveField(5)
   final TripType tripType;
-  @HiveField(6)
-  final WeatherModel? weather;
+  // @HiveField(6)
+  // final WeatherModel? weather;
 
   TripModel({
     required this.id,
@@ -27,6 +27,6 @@ class TripModel {
     required this.startDate,
     required this.endDate,
     required this.tripType,
-    this.weather,
+    // this.weather,
   });
 }
