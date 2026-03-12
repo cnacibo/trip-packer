@@ -25,22 +25,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   final List<OnboardingPage> _pages = [
     OnboardingPage(
-      title: 'Swipe Cats',
-      description: 'Swipe right to like, left to pass. Find your favorite feline!',
-      icon: Icons.swipe,
-      // catAnimation: 'assets/cat_swipe.json', 
+      title: 'Планируйте поездки',
+      description: 'Создавайте поездки, указывайте город и даты, получайте прогноз погоды',
+      icon: Icons.airplanemode_active,
     ),
     OnboardingPage(
-      title: 'Explore Breeds',
-      description: 'Learn about different cat breeds and their characteristics.',
-      icon: Icons.list,
-      // catAnimation: 'assets/cat_breeds.json',
+      title: 'Собирайте вещи',
+      description: 'Автоматический список вещей на основе погоды и типа поездки',
+      icon: Icons.checklist,
     ),
     OnboardingPage(
-      title: 'Get Details',
-      description: 'Tap on a cat to see detailed information and temperament.',
-      icon: Icons.info,
-      // catAnimation: 'assets/cat_details.json',
+      title: 'Планируйте дни',
+      description: 'Составляйте расписание активностей на каждый день',
+      icon: Icons.schedule,
     ),
   ];
 
@@ -87,7 +84,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextButton(
+                ElevatedButton(
                   onPressed: _finishOnboarding,
                   child: const Text('Skip'),
                 ),
@@ -156,12 +153,6 @@ class OnboardingPage {
   final String title;
   final String description;
   final IconData icon;
-  // final String catAnimation; 
 
-  OnboardingPage({
-    required this.title,
-    required this.description,
-    required this.icon,
-    // required this.catAnimation,
-  });
+  OnboardingPage({required this.title, required this.description, required this.icon});
 }

@@ -9,7 +9,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await di.init();
+  const apiKey = String.fromEnvironment('WEATHER_API_KEY');
+  await di.init(weatherApiKey: apiKey.isNotEmpty ? apiKey : null);
   runApp(const TripPacker());
 }
 
@@ -21,50 +22,56 @@ class TripPacker extends StatelessWidget {
     final myTheme = ThemeData(
         colorScheme: ColorScheme(
           brightness: Brightness.light,
-          primary: const Color(0xFF283618),    
-          onPrimary: Colors.white,
-          secondary: const Color(0xFFDDA15E), 
-          onSecondary: Colors.white,
+          primary: const Color(0xFF89CFF0),    
+          onPrimary: const Color(0xFF000000),
+          secondary: const Color(0xFFE5E4E2), 
+          onSecondary: const Color(0xFF000000),
           error: Colors.red,
           onError: Colors.white,
           surface: const Color(0xFFFFFFFF),
-          onSurface: const Color(0xFF283618),
+          onSurface: const Color(0xFF000000),
+          tertiary: const Color(0xFFF0F8FF), 
+          onTertiary: const Color(0xFF000000),
+          surfaceContainerHighest: const Color(0xFFF0F8FF),
+          outline: const Color(0xFFE5E4E2), 
         ),
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: const Color(0xFFF0F8FF),
         useMaterial3: true,
         fontFamily: 'Poppins',
         textTheme: const TextTheme(
           displayLarge: TextStyle(
             fontSize: 32,
             fontWeight: FontWeight.bold,
-            color: Colors.black87,
+            color: Color(0xFF000000),
           ),
           titleLarge: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.w600,
-            color: Colors.black87,
+            color: Color(0xFF000000),
           ),
           bodyLarge: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.normal,
-            color: Colors.black87,
+            color: Color(0xFF000000),
           ),
         ),
         appBarTheme: AppBarTheme(
           backgroundColor: Color(0xFFFFFFFF),
-          foregroundColor: Color(0xFF283618),
+          foregroundColor: Color(0xFF000000),
           elevation: 2,
           centerTitle: true,
         ),
         navigationBarTheme: NavigationBarThemeData(
-          backgroundColor: Color(0xFF283618).withValues(alpha: 0.3),
-          indicatorColor: Color(0xFF283618).withValues(alpha: 0.5),
-          surfaceTintColor: Color(0xFF283618), 
+          backgroundColor: Color(0xFF89CFF0).withValues(alpha: 0.9),
+          indicatorColor: Color(0xFFF0F8FF),
+          surfaceTintColor: const Color(0xFF89CFF0), 
           labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 4,
+            backgroundColor: const Color(0xFF89CFF0),
+            foregroundColor: const Color(0xFF000000), 
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
@@ -74,10 +81,4 @@ class TripPacker extends StatelessWidget {
 
     return MaterialApp(
       title: 'Trip Packer',
-      theme: myTheme,
-      home: const InitialScreen(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}
-
+    
