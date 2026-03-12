@@ -81,4 +81,10 @@ class TripPacker extends StatelessWidget {
 
     return MaterialApp(
       title: 'Trip Packer',
-    
+      theme: myTheme,
+      home: const InitialScreen(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+

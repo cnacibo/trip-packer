@@ -57,4 +57,9 @@ Future<void> init({String? weatherApiKey}) async {
 );
 
   // Use cases
-  getIt.registerLa
+  getIt.registerLazySingleton(() => SignInUseCase(getIt()));
+  getIt.registerLazySingleton(() => SignUpUseCase(getIt()));
+  getIt.registerLazySingleton(() => CheckOnboardingUseCase(getIt()));
+  getIt.registerLazySingleton(() => CompleteOnboardingUseCase(getIt()));
+  getIt.registerLazySingleton(() => IsLoggedInUseCase(getIt()));
+}

@@ -47,4 +47,7 @@ class _InitialScreenState extends State<InitialScreen> {
     return const Scaffold(
       body: Center(
         child: CircularProgressIndicator(),
-   
+      ),
+    );
+  }
+}
