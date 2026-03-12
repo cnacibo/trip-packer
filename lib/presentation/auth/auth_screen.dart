@@ -3,7 +3,7 @@ import '../../core/injection.dart';
 import '../../core/analytics/analytics_service.dart';
 import '../../domain/usecases/sign_in_usecase.dart';
 import '../../domain/usecases/sign_up_usecase.dart';
-import '../home/main_tab_screen.dart';
+import '../home/home_screen.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
@@ -92,7 +92,7 @@ class _AuthFormState extends State<AuthForm> with SingleTickerProviderStateMixin
 
       if (!mounted) return;
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const MainTabScreen()),
+        MaterialPageRoute(builder: (_) => HomeScreen()),
       );
     } else {
       if (_isLogin) {
