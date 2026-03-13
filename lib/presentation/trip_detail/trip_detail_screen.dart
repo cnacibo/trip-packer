@@ -24,7 +24,7 @@ class TripDetailScreen extends ConsumerWidget {
           ),
           bottom: TabBar(tabs: [
             Tab(icon: Icon(Icons.checklist), text: 'Вещи'),
-            Tab(icon: Icon(Icons.schedule), text: 'Погода'),
+            Tab(icon: Icon(Icons.sunny), text: 'Погода'),
           ]),
         ),
         body: TabBarView(
