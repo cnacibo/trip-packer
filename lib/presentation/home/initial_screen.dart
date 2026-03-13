@@ -4,7 +4,7 @@ import '../onboarding/onboarding_screen.dart';
 import '../auth/auth_screen.dart';
 import '../../domain/usecases/check_onboarding_usecase.dart';
 import '../../domain/usecases/is_logged_in_usecase.dart';
-import 'home_screen.dart';
+import '../trips_screen/trips_screen.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
@@ -32,7 +32,7 @@ class _InitialScreenState extends State<InitialScreen> {
       nextScreen = const OnboardingScreen();
     } else {
       final loggedIn = await _isLoggedIn.execute();
-      nextScreen = loggedIn ? HomeScreen() : const AuthScreen();
+      nextScreen = loggedIn ? TripsScreen() : const AuthScreen();
     }
 
     if (mounted) {

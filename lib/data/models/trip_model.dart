@@ -10,6 +10,10 @@ extension TripMapper on db.Trip {
       destination: destination,
       startDate: startDate,
       endDate: endDate,
+      tripType: TripType.values.firstWhere(
+            (e) => e.index == tripType,
+        orElse: () => TripType.other,
+      ),
     );
   }
 }
@@ -22,6 +26,7 @@ extension TripCompanionMapper on Trip {
       destination: Value(destination),
       startDate: Value(startDate),
       endDate: Value(endDate),
+      tripType: Value(tripType.index),
     );
   }
 }

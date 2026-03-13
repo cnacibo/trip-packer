@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:trip_packer/presentation/home/home_view_model.dart';
+import 'package:trip_packer/presentation/trips_screen/trips_view_model.dart';
 import 'package:trip_packer/presentation/create_trip/create_trip_screen.dart';
+import 'package:trip_packer/presentation/trip_detail/trip_detail_screen.dart';
 
-class HomeScreen extends ConsumerWidget {
+class TripsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tripsState = ref.watch(homeViewModelProvider);
+    final tripsState = ref.watch(tripsViewModelProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Мои поездки')),
@@ -23,7 +24,12 @@ class HomeScreen extends ConsumerWidget {
                 title: Text(trip.name),
                 subtitle: Text('${trip.destination} · ${trip.startDate.day}.${trip.startDate.month}'),
                 onTap: () {
-                  // Переход на детали
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => TripDetailScreen(tripId: trip.id),
+                    ),
+                  );
                 },
               );
             },
@@ -41,7 +47,7 @@ class HomeScreen extends ConsumerWidget {
           );
         
           if (result == true) {
-            ref.refresh(homeViewModelProvider);
+            ref.refresh(tripsViewModelProvider);
           }
         },
       ),

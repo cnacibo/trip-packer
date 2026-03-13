@@ -15,6 +15,10 @@ import '../domain/usecases/sign_in_usecase.dart';
 import '../domain/usecases/sign_up_usecase.dart';
 import 'package:trip_packer/domain/usecases/get_trips.dart';
 import 'package:trip_packer/domain/usecases/create_trip.dart';
+import '../domain/usecases/create_items.dart';
+import '../domain/usecases/get_packing_items.dart';
+import '../domain/usecases/update_packing_item.dart';
+import '../domain/usecases/get_trip_details.dart';
 
 // Data sources
 import '../data/datasources/remote/auth_datasource.dart';
@@ -71,6 +75,9 @@ Future<void> init({String? weatherApiKey}) async {
   getIt.registerLazySingleton(() => CompleteOnboardingUseCase(getIt()));
   getIt.registerLazySingleton(() => IsLoggedInUseCase(getIt()));
   getIt.registerLazySingleton(() => GetTrips(getIt()));
-  getIt.registerLazySingleton(() => CreateTrip(getIt()),
-);
+  getIt.registerLazySingleton(() => CreateTrip(getIt()));
+  getIt.registerLazySingleton(() => CreateItems(getIt()));
+  getIt.registerLazySingleton(() => GetPackingItems(getIt()));
+  getIt.registerLazySingleton(() => UpdatePackingItem(getIt()));
+  getIt.registerLazySingleton(() => GetTripDetails(getIt()));
 }
