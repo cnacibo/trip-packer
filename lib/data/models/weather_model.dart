@@ -29,15 +29,21 @@ class WeatherModel extends Weather {
     final windSpeed =
         (json['wind']?['max']?['speed'] as num?)?.toDouble() ?? 0.0;
 
-    final pressure = json['pressure']?['afternoon'] as int? ?? 0;
+    final pressureRaw = json['pressure']?['afternoon'];
+    final pressure = (pressureRaw is num) ? pressureRaw.toInt() : 0;
 
-    final humidity = json['humidity']?['afternoon'] as int? ?? 0;
+    final humidityRaw = json['humidity']?['afternoon'];
+    final humidity = (humidityRaw is num) ? humidityRaw.toInt() : 0;
 
-    final precipitation = json['precipitation']?['total'] as int? ?? 0;
+    final precipitationRaw = json['precipitation']?['total'];
+    final precipitation = (precipitationRaw is num) 
+        ? precipitationRaw.toDouble().round() 
+        : 0;
 
-    final cloudCover = json['cloud_cover']?['afternoon'] as int? ?? 0;
-    
-
+    final cloudCoverRaw = json['cloud_cover']?['afternoon'];
+    final cloudCover = (cloudCoverRaw is num) 
+        ? cloudCoverRaw.toDouble().round() 
+        : 0;
     return WeatherModel(
       date: date,
       temperatureMax: temperatureMax,

@@ -44,7 +44,12 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
 
         if (response.statusCode == 200) {
           final Map<String, dynamic> data = jsonDecode(response.body);
-          weatherList.add(WeatherModel.fromJson(data));
+          try {
+            final weather = WeatherModel.fromJson(data);
+            weatherList.add(weather);
+          } catch (e) {
+            rethrow;
+          }
         } else {
           throw Exception(
             'Failed to load weather: ${response.statusCode}\n'
