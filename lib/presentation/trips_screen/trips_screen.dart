@@ -152,21 +152,21 @@ class TripsScreen extends ConsumerWidget {
                             try {
                               await ref.read(tripsViewModelProvider.notifier).deleteTrip(trip.id);
                               if (context.mounted) {
-                                ScaffoldMessenger.of(context).showSnackBar(
+                                final messenger = ScaffoldMessenger.of(context);
+                                messenger.showSnackBar(
                                   SnackBar(
+                                    duration: const Duration(seconds: 3),
                                     content: Text('Поездка "${trip.name}" удалена'),
-                                    action: SnackBarAction(
-                                      label: 'Отмена',
-                                      onPressed: () {
-                                      },
-                                    ),
                                   ),
                                 );
                               }
                             } catch (e) {
                               if (context.mounted) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('Ошибка при удалении: $e')),
+                                  SnackBar(
+                                    content: Text('Ошибка при удалении: $e'),
+                                    duration: const Duration(seconds: 3),
+                                  ),
                                 );
                               }
                             }
