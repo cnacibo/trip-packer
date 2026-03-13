@@ -18,9 +18,29 @@ jobs:
         with:
           flutter-version: '3.x'
           channel: 'stable'
+      
+      - name: Setup Firebase from secret
+        run: echo "$FIREBASE_OPTIONS" > lib/firebase_options.dart
+        env:
+          FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
 
       - name: Install dependencies
         run: flutter pub get
 
-    #   - name: Analyze code
-    #     run: flutter analyze
+      - name: Analyze code
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test --coverage
+
+      - name: Install lcov
+        run: sudo apt-get install lcov
+
+      - name: Generate HTML coverage report
+        run: genhtml coverage/lcov.info -o coverage/html
+
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/html

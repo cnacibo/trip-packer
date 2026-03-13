@@ -29,7 +29,7 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
         
         String formattedDate = currentDate.toIso8601String().split('T')[0];
         
-        final uri = Uri.parse('$_weatherBaseUrl').replace(
+        final uri = Uri.parse(_weatherBaseUrl).replace(
           queryParameters: {
             'lat': lat.toString(),
             'lon': lon.toString(),

@@ -25,6 +25,7 @@ class AuthForm extends StatefulWidget {
 }
 
 class _AuthFormState extends State<AuthForm> with SingleTickerProviderStateMixin {
+  static final Pattern _emailPattern = r'^[^@]+@[^@]+\.[^@]+$';
   bool _isLogin = true;
   bool _isLoading = false;
   final _formKey = GlobalKey<FormState>();
@@ -131,7 +132,7 @@ class _AuthFormState extends State<AuthForm> with SingleTickerProviderStateMixin
               enabled: !_isLoading,
               validator: (value) {
                 if (value == null || value.isEmpty) return 'Email обязателен';
-                if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                if (!value.contains(_emailPattern)) {
                   return 'Неверный email';
                 }
                 return null;

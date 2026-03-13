@@ -53,6 +53,7 @@ class TripsViewModel extends Notifier<AsyncValue<List<Trip>>> {
         state = AsyncValue.data(updated);
       });
     } catch (e) {
+      throw Exception("Error: ${e.toString()}");
     }
   }
 }

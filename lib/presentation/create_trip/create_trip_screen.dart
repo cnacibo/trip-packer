@@ -216,7 +216,7 @@ class _CreateTripScreenState extends ConsumerState<CreateTripScreen> {
                                     _endDate,
                                     _selectedType,
                                   );
-                              if (success && mounted) {
+                              if (success && context.mounted) {
                                 Navigator.pop(context, true);
                               }
                             }

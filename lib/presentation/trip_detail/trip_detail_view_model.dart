@@ -1,4 +1,4 @@
-import 'package:riverpod/riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:trip_packer/domain/entities/trip.dart';
 import 'package:trip_packer/domain/entities/item.dart';
 import 'package:trip_packer/domain/entities/trip_weather_forecast.dart';
