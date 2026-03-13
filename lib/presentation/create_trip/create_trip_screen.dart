@@ -20,6 +20,17 @@ class _CreateTripScreenState extends ConsumerState<CreateTripScreen> {
   Widget build(BuildContext context) {
     final createState = ref.watch(createTripViewModelProvider);
 
+    ref.listen<AsyncValue<void>>(createTripViewModelProvider, (prev, next) {
+      if (next.hasError && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Ошибка: ${next.error}'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    });
+
     return Scaffold(
       appBar: AppBar(title: Text('Новая поездка')),
       body: Padding(

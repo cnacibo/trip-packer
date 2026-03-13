@@ -14,7 +14,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
       final List<WeatherModel> forecart = await remoteDataSource.getWeatherForCity(cityName, start,  end);
       return forecart; 
     } catch (e) {
-      throw Exception('Failed to get random cat: $e');
+      throw Exception('Failed to get weather: $e');
     }
 
   }
