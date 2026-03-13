@@ -1,32 +1,27 @@
-import 'package:hive/hive.dart';
-import 'trip_type_enum.dart';
+import '../../domain/entities/trip.dart';
+import '../datasources/local/trip_datasource.dart' as db; 
+import 'package:drift/drift.dart';
 
-part 'trip_model.g.dart';
+extension TripMapper on db.Trip {
+  Trip toDomain() {
+    return Trip(
+      id: id,
+      name: name,
+      destination: destination,
+      startDate: startDate,
+      endDate: endDate,
+    );
+  }
+}
 
-@HiveType(typeId: 0)
-class TripModel {
-  @HiveField(0)
-  final String id;
-  @HiveField(1)
-  final String name;
-  @HiveField(2)
-  final String destination;
-  @HiveField(3)
-  final DateTime startDate;
-  @HiveField(4)
-  final DateTime endDate;
-  @HiveField(5)
-  final TripType tripType;
-  // @HiveField(6)
-  // final WeatherModel? weather;
-
-  TripModel({
-    required this.id,
-    required this.name,
-    required this.destination,
-    required this.startDate,
-    required this.endDate,
-    required this.tripType,
-    // this.weather,
-  });
+extension TripCompanionMapper on Trip {
+  db.TripsCompanion toCompanion() {
+    return db.TripsCompanion(
+      id: Value(id),
+      name: Value(name),
+      destination: Value(destination),
+      startDate: Value(startDate),
+      endDate: Value(endDate),
+    );
+  }
 }

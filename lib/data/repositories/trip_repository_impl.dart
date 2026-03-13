@@ -1,23 +1,22 @@
-import 'package:trip_packer/data/datasources/trip_local_datasource.dart';
-import 'package:trip_packer/data/models/trip_model.dart';
-import 'package:trip_packer/domain/entities/trip.dart';
-import 'package:trip_packer/domain/repositories/trip_repository.dart';
+import '../../domain/entities/trip.dart';
+import '../../domain/repositories/trip_repository.dart';
+import '../datasources/local/trip_datasource.dart' as db;
+import '../models/trip_model.dart';
 
 class TripRepositoryImpl implements TripRepository {
-  final TripLocalDataSource localDataSource;
+  final db.AppDatabase _db;
 
-  TripRepositoryImpl({required this.localDataSource});
+  TripRepositoryImpl(this._db);
 
   @override
   Future<List<Trip>> getTrips() async {
-    final models = await localDataSource.getAllTrips();
-    return models.map((m) => m.toEntity()).toList();
+    final trips = await _db.select(_db.trips).get();
+    return trips.map((t) => t.toDomain()).toList();
   }
 
   @override
   Future<void> createTrip(Trip trip) async {
-    final model = TripModel.fromEntity(trip);
-    await localDataSource.addTrip(model);
+    await _db.into(_db.trips).insert(trip.toCompanion());
   }
 
 }

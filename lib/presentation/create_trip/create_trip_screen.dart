@@ -70,7 +70,7 @@ class _CreateTripScreenState extends ConsumerState<CreateTripScreen> {
                     final success = await ref.read(createTripViewModelProvider.notifier)
                         .submitTrip(_nameController.text, _destinationController.text, _startDate, _endDate);
                     if (success && mounted) {
-                      Navigator.pop(context);
+                      Navigator.pop(context, true);
                     }
                   }
                 },

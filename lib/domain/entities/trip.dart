@@ -1,3 +1,5 @@
+import 'package:equatable/equatable.dart';
+
 class Trip {
   final String id;
   final String name;
@@ -12,4 +14,7 @@ class Trip {
     required this.startDate,
     required this.endDate,
   });
+
+  @override
+  List<Object?> get props => [id, name, destination, startDate, endDate];
 }

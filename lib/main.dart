@@ -3,6 +3,7 @@ import 'presentation/home/initial_screen.dart';
 import 'core/injection.dart' as di;
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,7 +12,11 @@ void main() async {
   );
   const apiKey = String.fromEnvironment('WEATHER_API_KEY');
   await di.init(weatherApiKey: apiKey.isNotEmpty ? apiKey : null);
-  runApp(const TripPacker());
+  runApp(
+    ProviderScope(
+      child: TripPacker(),
+    ),
+  );
 }
 
 class TripPacker extends StatelessWidget {

@@ -17,9 +17,9 @@ import 'package:trip_packer/domain/usecases/get_trips.dart';
 import 'package:trip_packer/domain/usecases/create_trip.dart';
 
 // Data sources
-import '../data/datasources/auth_remote_datasource.dart';
-import '../data/datasources/auth_remote_datasource_impl.dart';
-import 'package:trip_packer/data/datasources/trip_local_datasource.dart';
+import '../data/datasources/remote/auth_datasource.dart';
+import '../data/datasources/remote/auth_datasource_impl.dart';
+import 'package:trip_packer/data/datasources/local/trip_datasource.dart';
 
 // Repositories
 import '../domain/repositories/auth_repository.dart';
@@ -50,10 +50,8 @@ Future<void> init({String? weatherApiKey}) async {
   // getIt.registerLazySingleton<WeatherRemoteDataSource>(
   //   () => WeatherRemoteDataSourceImpl(httpClient: getIt(), apiKey: weatherApiKey),
   // );
-  final localDataSource = TripLocalDataSourceImpl();
-  await localDataSource.initHive();
-
-  getIt.registerLazySingleton<TripLocalDataSource>(() => localDataSource);
+  final appDatabase = AppDatabase(); 
+  getIt.registerLazySingleton<AppDatabase>(() => appDatabase);
 
   // Repositories
   getIt.registerLazySingleton<AuthRepository>(
@@ -62,8 +60,8 @@ Future<void> init({String? weatherApiKey}) async {
   getIt.registerLazySingleton<OnboardingRepository>(
     () => OnboardingRepositoryImpl(sharedPreferences: getIt()),
   );
-  getIt.registerLazySingleton<TripRepository>(
-    () => TripRepositoryImpl(localDataSource: getIt()),
+ getIt.registerLazySingleton<TripRepository>(
+    () => TripRepositoryImpl(getIt<AppDatabase>()),
   );
 
   // Use cases
