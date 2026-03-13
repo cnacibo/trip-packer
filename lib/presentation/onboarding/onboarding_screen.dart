@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../core/injection.dart'; 
 import '../auth/auth_screen.dart';
-import '../../domain/usecases/complete_onboarding_usecase.dart';
+import '../../domain/usecases/auth/complete_onboarding_usecase.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

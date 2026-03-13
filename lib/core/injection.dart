@@ -8,20 +8,20 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'analytics/analytics_service.dart';
 
 // Use cases
-import '../domain/usecases/check_onboarding_usecase.dart';
-import '../domain/usecases/complete_onboarding_usecase.dart';
-import '../domain/usecases/is_logged_in_usecase.dart';
-import '../domain/usecases/sign_in_usecase.dart';
-import '../domain/usecases/sign_up_usecase.dart';
-import 'package:trip_packer/domain/usecases/get_trips.dart';
-import 'package:trip_packer/domain/usecases/create_trip.dart';
-import '../domain/usecases/create_items.dart';
-import '../domain/usecases/get_packing_items.dart';
-import '../domain/usecases/update_packing_item.dart';
-import '../domain/usecases/get_trip_details.dart';
-import 'package:trip_packer/domain/usecases/get_weather_forecast.dart';
-import 'package:trip_packer/domain/usecases/add_forecast_for_trip.dart';
-import 'package:trip_packer/domain/usecases/view_trip_forecast.dart';
+import '../domain/usecases/auth/check_onboarding_usecase.dart';
+import '../domain/usecases/auth/complete_onboarding_usecase.dart';
+import '../domain/usecases/auth/is_logged_in_usecase.dart';
+import '../domain/usecases/auth/sign_in_usecase.dart';
+import '../domain/usecases/auth/sign_up_usecase.dart';
+import 'package:trip_packer/domain/usecases/trip/get_trips.dart';
+import 'package:trip_packer/domain/usecases/trip/create_trip.dart';
+import '../domain/usecases/packing/create_items.dart';
+import '../domain/usecases/packing/get_packing_items.dart';
+import '../domain/usecases/packing/update_packing_item.dart';
+import '../domain/usecases/trip/get_trip_details.dart';
+import 'package:trip_packer/domain/usecases/weather/get_weather_forecast.dart';
+import 'package:trip_packer/domain/usecases/weather/add_forecast_for_trip.dart';
+import 'package:trip_packer/domain/usecases/weather/view_trip_forecast.dart';
 
 // Data sources
 import '../data/datasources/remote/auth_datasource.dart';

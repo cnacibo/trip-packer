@@ -1,5 +1,5 @@
-import '../repositories/weather_repository.dart';
-import '../entities/weather.dart';
+import '../../repositories/weather_repository.dart';
+import '../../entities/weather.dart';
 
 class GetWeatherForecast {
   final WeatherRepository weatherRepository;

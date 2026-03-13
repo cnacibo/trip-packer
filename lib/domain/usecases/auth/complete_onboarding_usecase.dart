@@ -1,4 +1,4 @@
-import '../repositories/onboarding_repository.dart';
+import '../../repositories/onboarding_repository.dart';
 
 class CompleteOnboardingUseCase {
   final OnboardingRepository repository;

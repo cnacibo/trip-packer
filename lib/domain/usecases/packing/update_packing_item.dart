@@ -1,4 +1,4 @@
-import '../repositories/trip_repository.dart';
+import '../../repositories/trip_repository.dart';
 
 class UpdatePackingItem {
   final TripRepository repository;

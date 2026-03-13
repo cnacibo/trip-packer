@@ -1,5 +1,5 @@
-import '../entities/item.dart';
-import '../repositories/trip_repository.dart';
+import '../../entities/item.dart';
+import '../../repositories/trip_repository.dart';
 
 class CreateItems {
   final TripRepository repository;
