@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:trip_packer/presentation/trips_screen/trips_view_model.dart';
 import 'package:trip_packer/presentation/create_trip/create_trip_screen.dart';
 import 'trip_card.dart';
+import '../auth/auth_screen.dart';
 
 class TripsScreen extends ConsumerWidget {
   const TripsScreen({super.key});
@@ -37,6 +38,9 @@ class TripsScreen extends ConsumerWidget {
           physics: const AlwaysScrollableScrollPhysics(),
           slivers: [
             SliverAppBar(
+              actions: [
+                _LogoutButton(),
+              ],
               expandedHeight: 100,
               floating: false,
               pinned: true,
@@ -169,5 +173,49 @@ class TripsScreen extends ConsumerWidget {
         ),
       ),
     );
+  }
+}
+
+class _LogoutButton extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return IconButton(
+      icon: const Icon(Icons.logout, color: Colors.white),
+      onPressed: () => _showLogoutDialog(context, ref),
+      tooltip: 'Выйти',
+    );
+  }
+
+  Future<void> _showLogoutDialog(BuildContext context, WidgetRef ref) async {
+    final shouldLogout = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Выход'),
+        content: const Text('Вы уверены, что хотите выйти?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Отмена'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: const Text('Выйти'),
+          ),
+        ],
+      ),
+    );
+
+    if (shouldLogout == true) {
+      final success = await ref.read(tripsViewModelProvider.notifier).logout();
+      if (success && context.mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const AuthScreen()),
+        );
+      } else if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Ошибка при выходе')),
+        );
+      }
+    }
   }
 }

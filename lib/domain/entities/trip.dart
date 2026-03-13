@@ -1,5 +1,3 @@
-import 'package:equatable/equatable.dart';
-
 enum TripType { beach, mountains, city, business, other }
 
 class Trip {
@@ -18,7 +16,4 @@ class Trip {
     required this.endDate,
     required this.tripType,
   });
-
-  @override
-  List<Object?> get props => [id, name, destination, startDate, endDate];
 }

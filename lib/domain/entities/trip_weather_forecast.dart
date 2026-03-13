@@ -14,7 +14,4 @@ class TripWeatherForecast {
     required this.precipitation,
     required this.cloudCover,
   });
-
-  @override
-  List<Object?> get props => [id, tripId, date, temperatureAfternoon, precipitation, cloudCover];
 }
