@@ -86,7 +86,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               children: [
                 ElevatedButton(
                   onPressed: _finishOnboarding,
-                  child: const Text('Skip'),
+                  child: const Text('Пропустить'),
                 ),
                 Row(
                   children: List.generate(
@@ -106,7 +106,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 ElevatedButton(
                   onPressed: _nextPage,
-                  child: Text(_currentPage == _pages.length - 1 ? 'Start' : 'Next'),
+                  child: Text(_currentPage == _pages.length - 1 ? 'Начать' : 'Дальше'),
                 ),
               ],
             ),

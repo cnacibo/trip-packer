@@ -11,7 +11,7 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Welcome')),
+      appBar: AppBar(title: const Text('Добро пожаловать')),
       body: const AuthForm(),
     );
   }
@@ -103,7 +103,7 @@ class _AuthFormState extends State<AuthForm> with SingleTickerProviderStateMixin
 
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(_isLogin ? 'Invalid credentials' : 'Registration failed')),
+        SnackBar(content: Text(_isLogin ? 'Неверные данные' : 'Регистрация не прошла')),
       );
     }
   }
@@ -120,7 +120,7 @@ class _AuthFormState extends State<AuthForm> with SingleTickerProviderStateMixin
             FadeTransition(
               opacity: _fadeAnimation,
               child: Text(
-                _isLogin ? 'Login' : 'Sign Up',
+                _isLogin ? 'Вход' : 'Регистрация',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
@@ -130,9 +130,9 @@ class _AuthFormState extends State<AuthForm> with SingleTickerProviderStateMixin
               decoration: const InputDecoration(labelText: 'Email'),
               enabled: !_isLoading,
               validator: (value) {
-                if (value == null || value.isEmpty) return 'Email required';
+                if (value == null || value.isEmpty) return 'Email обязателен';
                 if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                  return 'Invalid email';
+                  return 'Неверный email';
                 }
                 return null;
               },
@@ -144,8 +144,8 @@ class _AuthFormState extends State<AuthForm> with SingleTickerProviderStateMixin
               decoration: const InputDecoration(labelText: 'Password'),
               enabled: !_isLoading,
               validator: (value) {
-                if (value == null || value.isEmpty) return 'Password required';
-                if (value.length < 6) return 'Min 6 characters';
+                if (value == null || value.isEmpty) return 'Password обязятелен';
+                if (value.length < 6) return 'Минимум 6 символов';
                 return null;
               },
             ),
@@ -155,11 +155,11 @@ class _AuthFormState extends State<AuthForm> with SingleTickerProviderStateMixin
             else
               ElevatedButton(
                 onPressed: _submit,
-                child: Text(_isLogin ? 'Login' : 'Sign Up'),
+                child: Text(_isLogin ? 'Войти' : 'Зарегистрироваться'),
               ),
             TextButton(
               onPressed: _isLoading ? null : _toggleMode,
-              child: Text(_isLogin ? 'Create an account' : 'Already have an account?'),
+              child: Text(_isLogin ? 'Создать аккаунт' : 'Уже есть аккаунт?'),
             ),
           ],
         ),
