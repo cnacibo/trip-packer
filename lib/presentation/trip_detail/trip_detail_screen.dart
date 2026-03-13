@@ -7,7 +7,7 @@ import 'package:trip_packer/presentation/trip_detail/weather_tab.dart';
 class TripDetailScreen extends ConsumerWidget {
   final String tripId;
 
-  TripDetailScreen({required this.tripId});
+  const TripDetailScreen({super.key, required this.tripId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
