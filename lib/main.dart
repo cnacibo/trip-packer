@@ -4,6 +4,7 @@ import 'core/injection.dart' as di;
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,8 +20,18 @@ void main() async {
   );
 }
 
-class TripPacker extends StatelessWidget {
+class TripPacker extends StatefulWidget {
   const TripPacker({super.key});
+  @override
+  State<TripPacker> createState() => _TripPackerState();
+}
+
+class _TripPackerState extends State<TripPacker> {
+  static const _navBarColor = Color(0x00000000); 
+  static const _navBarIconBrightness = Brightness.dark;
+
+  @override
+  void initState() {super.initState();}
 
   @override
   Widget build(BuildContext context) {
@@ -84,11 +95,20 @@ class TripPacker extends StatelessWidget {
         ),
       );
 
-    return MaterialApp(
-      title: 'Trip Packer',
-      theme: myTheme,
-      home: const InitialScreen(),
-      debugShowCheckedModeBanner: false,
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        systemNavigationBarColor: _navBarColor,
+        systemNavigationBarDividerColor: Colors.transparent,
+        systemNavigationBarIconBrightness: _navBarIconBrightness,
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+      ),
+      child: MaterialApp(
+        title: 'Trip Packer',
+        theme: myTheme,
+        home: const InitialScreen(),
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }
