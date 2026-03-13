@@ -1,12 +1,12 @@
-import '../repositories/weather_repository.dart';
-import '../entities/weather.dart';
+import '../repositories/trip_repository.dart';
+import '../entities/trip_weather_forecast.dart';
 
 class AddForecastForTrip {
-  final WeatherRepository weatherRepository;
+  final TripRepository repository;
 
-  AddForecastForTrip(this.weatherRepository);
+  AddForecastForTrip(this.repository);
 
-  Future<List<Weather>> call(String cityName, DateTime start, DateTime end) async {
-    return await weatherRepository.getWeatherForecast(cityName, start, end);
+  Future<void> call(List<TripWeatherForecast> forecast) async {
+    return await repository.addForecastForTrip(forecast);
   }
 }

@@ -9,8 +9,8 @@ class WeatherTab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(tripDetailProvider(tripId).notifier);
-    return StreamBuilder<List>(
-      stream: viewModel.getPackingItems(),
+    return FutureBuilder<List>(
+      future: viewModel.viewTripForecast(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting && !snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());

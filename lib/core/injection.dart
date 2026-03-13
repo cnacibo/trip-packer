@@ -20,6 +20,8 @@ import '../domain/usecases/get_packing_items.dart';
 import '../domain/usecases/update_packing_item.dart';
 import '../domain/usecases/get_trip_details.dart';
 import 'package:trip_packer/domain/usecases/get_weather_forecast.dart';
+import 'package:trip_packer/domain/usecases/add_forecast_for_trip.dart';
+import 'package:trip_packer/domain/usecases/view_trip_forecast.dart';
 
 // Data sources
 import '../data/datasources/remote/auth_datasource.dart';
@@ -89,4 +91,6 @@ Future<void> init({String? weatherApiKey}) async {
   getIt.registerLazySingleton(() => UpdatePackingItem(getIt()));
   getIt.registerLazySingleton(() => GetTripDetails(getIt()));
   getIt.registerLazySingleton(() => GetWeatherForecast(getIt()));
+  getIt.registerLazySingleton(() => AddForecastForTrip(getIt()));
+  getIt.registerLazySingleton(() => ViewTripForecast(getIt()));
 }
