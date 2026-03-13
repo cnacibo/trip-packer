@@ -29,12 +29,24 @@ class Items extends Table {
   Set<Column> get primaryKey => {id};
 }
 
-@DriftDatabase(tables: [Trips, Items])
+class TripWeather extends Table {
+  TextColumn get id => text()(); 
+  TextColumn get tripId => text().references(Trips, #id, onDelete: KeyAction.cascade)();
+  DateTimeColumn get date => dateTime()(); 
+  RealColumn get temperatureAfternoon => real()();
+  IntColumn get precipitation => integer()();
+  IntColumn get cloudCover => integer()();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+@DriftDatabase(tables: [Trips, Items, TripWeather])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 5;
 
   @override
   MigrationStrategy get migration {
@@ -45,6 +57,9 @@ class AppDatabase extends _$AppDatabase {
       onUpgrade: (Migrator m, int from, int to) async {
         if (from == 1) {
           await m.createTable(items);
+        }
+        if (from < 5) { 
+          await m.createTable(tripWeather);
         }
       },
     );

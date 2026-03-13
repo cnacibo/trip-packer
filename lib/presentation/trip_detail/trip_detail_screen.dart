@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:trip_packer/presentation/trip_detail/trip_detail_view_model.dart';
 import 'package:trip_packer/presentation/trip_detail/packing_tab.dart';
-import 'package:trip_packer/presentation/trip_detail/plan_tab.dart';
+import 'package:trip_packer/presentation/trip_detail/weather_tab.dart';
 
 class TripDetailScreen extends ConsumerWidget {
   final String tripId;
@@ -24,13 +24,13 @@ class TripDetailScreen extends ConsumerWidget {
           ),
           bottom: TabBar(tabs: [
             Tab(icon: Icon(Icons.checklist), text: 'Вещи'),
-            Tab(icon: Icon(Icons.schedule), text: 'План'),
+            Tab(icon: Icon(Icons.schedule), text: 'Погода'),
           ]),
         ),
         body: TabBarView(
           children: [
             PackingTab(tripId: tripId),
-            PlanTab(tripId: tripId),
+            WeatherTab(tripId: tripId),
           ],
         ),
       ),

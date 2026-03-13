@@ -1,11 +1,13 @@
 import '../../domain/entities/item.dart';
 import '../../domain/entities/trip.dart';
+import '../../domain/entities/weather.dart';
 import 'package:uuid/uuid.dart';
 
 class PackingListGenerator {
   static List<Item> generate({
     required String tripId,
     required TripType tripType,
+    required List<Weather> forecast,
   }) {
     final items = <Item>[];
 
@@ -45,7 +47,42 @@ class PackingListGenerator {
         break;
     }
 
+    _addWeatherBasedItems(tripId, forecast, items);
+
     return items;
+  }
+
+  static void _addWeatherBasedItems(String tripId, List<Weather> forecast, List<Item> items) {
+    const double rainThreshold = 0.0;
+    const double hotThreshold = 25.0;
+    const double coldThreshold = 10.0;
+    const double windThreshold = 10.0;
+
+    bool hasRain = forecast.any((w) => w.precipitation > rainThreshold);
+    bool hasHot = forecast.any((w) => w.temperatureAfternoon > hotThreshold);
+    bool hasCold = forecast.any((w) => w.temperatureAfternoon < coldThreshold);
+    bool hasWind = forecast.any((w) => w.windSpeed > windThreshold);
+    bool hasLargeTempRange = forecast.any((w) => (w.temperatureMax - w.temperatureMin) > 15);
+
+    if (hasRain) {
+      items.add(_createItem(tripId, 'Зонт', ItemCategory.other));
+      items.add(_createItem(tripId, 'Дождевик', ItemCategory.clothing));
+    }
+    if (hasHot) {
+      items.add(_createItem(tripId, 'Солнцезащитный крем', ItemCategory.other));
+      items.add(_createItem(tripId, 'Головной убор', ItemCategory.clothing));
+      items.add(_createItem(tripId, 'Солнечные очки', ItemCategory.other));
+    }
+    if (hasCold) {
+      items.add(_createItem(tripId, 'Тёплая куртка', ItemCategory.clothing));
+      items.add(_createItem(tripId, 'Термобельё', ItemCategory.clothing));
+    }
+    if (hasWind) {
+      items.add(_createItem(tripId, 'Ветровка', ItemCategory.clothing));
+    }
+    if (hasLargeTempRange) {
+      items.add(_createItem(tripId, 'Многослойная одежда', ItemCategory.clothing));
+    }
   }
 
   static Item _createItem(String tripId, String name, ItemCategory category) {
