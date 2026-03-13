@@ -112,10 +112,70 @@ class TripsScreen extends ConsumerWidget {
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
                         final trip = trips[index];
-                        return AnimatedOpacity(
-                          duration: Duration(milliseconds: 300 + index * 50),
-                          opacity: 1.0,
-                          child: TripCard(trip: trip),
+                        return Dismissible(
+                          key: Key(trip.id),
+                          direction: DismissDirection.endToStart, 
+                          background: Container(
+                            alignment: Alignment.centerRight,
+                            padding: const EdgeInsets.only(right: 20),
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(
+                              Icons.delete,
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                          ),
+                          confirmDismiss: (direction) async {
+                            return await showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                title: const Text('Удаление поездки'),
+                                content: Text('Вы уверены, что хотите удалить "${trip.name}"?'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.of(ctx).pop(false),
+                                    child: const Text('Отмена'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () => Navigator.of(ctx).pop(true),
+                                    style: TextButton.styleFrom(foregroundColor: Colors.red),
+                                    child: const Text('Удалить'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          onDismissed: (direction) async {
+                            try {
+                              await ref.read(tripsViewModelProvider.notifier).deleteTrip(trip.id);
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('Поездка "${trip.name}" удалена'),
+                                    action: SnackBarAction(
+                                      label: 'Отмена',
+                                      onPressed: () {
+                                      },
+                                    ),
+                                  ),
+                                );
+                              }
+                            } catch (e) {
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Ошибка при удалении: $e')),
+                                );
+                              }
+                            }
+                          },
+                          child: AnimatedOpacity(
+                            duration: Duration(milliseconds: 300 + index * 50),
+                            opacity: 1.0,
+                            child: TripCard(trip: trip),
+                          ),
                         );
                       },
                       childCount: trips.length,
@@ -219,3 +279,4 @@ class _LogoutButton extends ConsumerWidget {
     }
   }
 }
+

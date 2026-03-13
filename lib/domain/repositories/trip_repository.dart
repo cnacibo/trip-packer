@@ -11,4 +11,5 @@ abstract class TripRepository {
   Stream<List<Item>> getPackingItemsForTrip(String tripId);
   Future<void> addForecastForTrip(List<TripWeatherForecast> forecast);
   Future<List<TripWeatherForecast>> viewTripForecast(String tripId);
+  Future<void> deleteTrip(String tripId);
 }

@@ -73,4 +73,9 @@ class TripRepositoryImpl implements TripRepository {
     return rows.map((r) => r.toDomain()).toList();
   }
 
+  @override
+  Future<void> deleteTrip(String tripId) async {
+    await (_db.delete(_db.trips)..where((t) => t.id.equals(tripId))).go();
+  }
+
 }

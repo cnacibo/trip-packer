@@ -1,5 +1,5 @@
-import '../../repositories/trip_repository.dart';
-import '../../entities/trip_weather_forecast.dart';
+import '../repositories/trip_repository.dart';
+import '../entities/trip_weather_forecast.dart';
 
 class ViewTripForecast {
   final TripRepository repository;
