@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:trip_packer/presentation/create_trip/create_trip_view_model.dart';
+import 'package:trip_packer/domain/entities/trip.dart';
 
 class CreateTripScreen extends ConsumerStatefulWidget {
   @override
@@ -13,6 +14,7 @@ class _CreateTripScreenState extends ConsumerState<CreateTripScreen> {
   final _destinationController = TextEditingController();
   DateTime _startDate = DateTime.now();
   DateTime _endDate = DateTime.now().add(Duration(days: 3));
+  TripType _selectedType = TripType.city;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,18 @@ class _CreateTripScreenState extends ConsumerState<CreateTripScreen> {
                 controller: _destinationController,
                 decoration: InputDecoration(labelText: 'Город'),
                 validator: (v) => v!.isEmpty ? 'Введите город' : null,
+              ),
+              const SizedBox(height: 16),
+              DropdownButtonFormField<TripType>(
+                value: _selectedType,
+                decoration: const InputDecoration(labelText: 'Тип поездки'),
+                items: TripType.values.map((type) {
+                  return DropdownMenuItem(
+                    value: type,
+                    child: Text(type.name.toUpperCase()),
+                  );
+                }).toList(),
+                onChanged: (val) => setState(() => _selectedType = val!),
               ),
               ListTile(
                 title: Text('Начало: ${_startDate.day}.${_startDate.month}.${_startDate.year}'),
@@ -68,7 +82,7 @@ class _CreateTripScreenState extends ConsumerState<CreateTripScreen> {
                 onPressed: createState.isLoading ? null : () async {
                   if (_formKey.currentState!.validate()) {
                     final success = await ref.read(createTripViewModelProvider.notifier)
-                        .submitTrip(_nameController.text, _destinationController.text, _startDate, _endDate);
+                        .submitTrip(_nameController.text, _destinationController.text, _startDate, _endDate, _selectedType);
                     if (success && mounted) {
                       Navigator.pop(context, true);
                     }

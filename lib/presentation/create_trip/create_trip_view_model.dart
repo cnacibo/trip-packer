@@ -22,14 +22,14 @@ class CreateTripViewModel extends Notifier<AsyncValue<void>> {
     return const AsyncValue.data(null);
   }
 
-  Future<bool> submitTrip(String name, String destination, DateTime start, DateTime end) async {
+  Future<bool> submitTrip(String name, String destination, DateTime start, DateTime end, TripType type) async {
     state = const AsyncValue.loading();
     try {
       final tripId = _uuid.v4();
 
       final items = PackingListGenerator.generate(
         tripId: tripId,
-        tripType: TripType.city,
+        tripType: type,
       );
 
       final trip = Trip(
@@ -38,7 +38,7 @@ class CreateTripViewModel extends Notifier<AsyncValue<void>> {
         destination: destination,
         startDate: start,
         endDate: end,
-        tripType: TripType.city,
+        tripType: type,
       );
       await _createTrip(trip);
       await _createItems(items);
