@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../core/injection.dart'; 
-import '../onboarding/onboarding_screen.dart';
-import '../auth/auth_screen.dart';
-import '../../domain/usecases/check_onboarding_usecase.dart';
-import '../../domain/usecases/is_logged_in_usecase.dart';
-import '../trips_screen/trips_screen.dart';
+import 'package:trip_packer/core/injection.dart'; 
+import 'package:trip_packer/presentation/onboarding/onboarding_screen.dart';
+import 'package:trip_packer/presentation/auth/auth_screen.dart';
+import 'package:trip_packer/domain/usecases/check_onboarding_usecase.dart';
+import 'package:trip_packer/domain/usecases/is_logged_in_usecase.dart';
+import 'package:trip_packer/presentation/trips_screen/trips_screen.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
