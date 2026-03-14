@@ -79,5 +79,12 @@ flutter run --dart-define=WEATHER_API_KEY="ключ_от_openweathermap"
 ## 📦 Ссылка на скачивание APK
 https://github.com/cnacibo/trip-packer/releases/download/v1.0.0/app-release.apk
 
+---
+
 ## 💻 Презентация
 [Trip Packer](./Trip%20Packer.pdf)
+
+---
+
+## 📹 Демо
+[Demo video](./trip-packer.mp4)
