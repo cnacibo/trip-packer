@@ -11,7 +11,6 @@ class PackingListGenerator {
   }) {
     final items = <Item>[];
 
-    // Базовые вещи для всех поездок
     items.addAll([
       _createItem(tripId, 'Паспорт', ItemCategory.documents),
       _createItem(tripId, 'Билеты', ItemCategory.documents),
@@ -20,7 +19,6 @@ class PackingListGenerator {
       _createItem(tripId, 'Зарядное устройство', ItemCategory.electronics),
     ]);
     
-    // Специфичные вещи по типу поездки
     switch (tripType) {
       case TripType.beach:
         items.addAll([

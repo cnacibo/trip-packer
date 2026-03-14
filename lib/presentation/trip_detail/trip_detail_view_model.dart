@@ -36,7 +36,6 @@ class TripDetailViewModel extends Notifier<AsyncValue<Trip?>> {
     }
   }
 
-  // Для списка вещей
   Stream<List<Item>> getPackingItems() {
     return _getPackingItems(tripId);
   }
@@ -45,7 +44,6 @@ class TripDetailViewModel extends Notifier<AsyncValue<Trip?>> {
     await _updatePackingItem(itemId, packed);
   }
 
-  // Для погоды
   Future<List<TripWeatherForecast>> viewTripForecast() async  {
     return await _viewTripForecast(tripId);
   }
