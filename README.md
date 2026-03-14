@@ -54,7 +54,7 @@ mariia_vlasova@MacBook-Air-Maria-5 lib % tree
 
 ---
 
-## ⚙️ Шаги запуска/сборки
+## 🧱 Шаги запуска/сборки
 
 1. Клонируйте репозиторий:
 
@@ -77,3 +77,7 @@ flutter run --dart-define=WEATHER_API_KEY="ключ_от_openweathermap"
 ---
 
 ## 📦 Ссылка на скачивание APK
+https://github.com/cnacibo/trip-packer/releases/download/v1.0.0/app-release.apk
+
+## 💻 Презентация
+[Trip Packer](./Trip%20Packer.pdf)
